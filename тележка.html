@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>яндекс тележка</title>
+  </head>
+  <style>
+    /*  #f45a3b, #000000,
+#d8d8d8, #ff0000- red, #999999, #666666, #222222, #ffffff.
+ */
+    .page {
+      width: 100%;
+    }
+
+    .car {
+      width: 1000px;
+      height: 1000px;
+      margin: 0 auto;
+      background-color: antiquewhite;
+      position: relative;
+    }
+
+    .car__flag {
+      width: 85px;
+      height: 55px;
+      background-color: #ff0000;
+      clip-path: polygon(0% 55%, 100% 10%, 100% 100%);
+      position: absolute;
+      left: 90px;
+      top: 2px;
+    }
+
+    .car__stick {
+      width: 5px;
+      height: 410px;
+      background-color: #666666;
+      position: absolute;
+      top: 0;
+      left: 173px;
+    }
+
+    .car__top-up-block {
+      width: 70px;
+      height: 55px;
+      background-color: #666666;
+      position: absolute;
+      top: 410px;
+      left: 140px;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .car__inside-block {
+      width: 70px;
+      height: 10px;
+      background-color: #000000;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .car__top-down-block {
+      background-color: #000000;
+      width: 120px;
+      height: 70px;
+      position: absolute;
+      left: 95px;
+      top: 463px;
+      clip-path: polygon(20% 0%, 0% 100%, 100% 100%, 100% 0%);
+    }
+
+    .car__bottom {
+      position: relative;
+    }
+
+    .car__bottom-1 {
+      width: 375px;
+      height: 65px;
+      position: absolute;
+      background-color: #d8d8d8;
+      top: 533px;
+      left: 6px;
+      border-radius: 60px 0 0 0;
+    }
+
+    .car__bottom-1-2 {
+      clip-path: ellipse(70% 100% at 30% 100%);
+      width: 375px;
+      height: 65px;
+      position: absolute;
+      background-color: #d8d8d8;
+      top: 533px;
+      left: 305px;
+    }
+
+    .car__bottom-2 {
+      width: 690px;
+      height: 20px;
+      background-color: #ff0000;
+      position: absolute;
+      top: 598px;
+      border-radius: 10px;
+    }
+
+    .car__bottom-3 {
+      width: 665px;
+      height: 165px;
+      background-color: #f45a3b;
+      position: absolute;
+      top: 616px;
+      left: 13px;
+      border-radius: 0 0 30px 30px;
+    }
+
+    .car__bottom-4 {
+      width: 630px;
+      height: 140px;
+      background-color: #222222;
+      position: absolute;
+      top: 780px;
+      left: 29px;
+      clip-path: polygon(2% 0, 98% 0%, 100% 10%, 100% 37%, 86% 100%, 14% 100%, 0 35%, 0 10%);
+    }
+
+    .car__wheels {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      width: 612px;
+      position: absolute;
+      top: 830px;
+      left: 44px;
+    }
+
+    .car__wheel {
+      width: 165px;
+      height: 165px;
+      border-radius: 50%;
+      background-color: #000000;
+    }
+  </style>
+  <body>
+    <div class="page">
+      <div class="car">
+        <div class="car__top">
+          <div class="car__flag"></div>
+          <div class="car__stick"></div>
+          <div class="car__top-up-block">
+            <div class="car__inside-block"></div>
+          </div>
+          <div class="car__top-down-block"></div>
+        </div>
+        <div class="car__bottom">
+          <div class="car__bottom-1"></div>
+          <div class="car__bottom-1-2"></div>
+          <div class="car__bottom-2"></div>
+          <div class="car__bottom-3"></div>
+          <div class="car__bottom-4"></div>
+          <ul class="car__wheels">
+            <li class="car__wheel"></li>
+            <li class="car__wheel"></li>
+            <li class="car__wheel"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

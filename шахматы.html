@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chess</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    tbody {
+      overflow: hidden;
+    }
+    .chess {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      height: 100vh;
+      border-spacing: 0;
+    }
+    .white {
+      background-color: #f4cd8d;
+      width: 30px;
+      height: 30px;
+      position: relative;
+    }
+    .white__span {
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 60px;
+      top: 30px;
+      background-color: #0000ff;
+      z-index: 1;
+    }
+    .white__span::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: -30px;
+      top: 30px;
+      background-color: #0000ff;
+    }
+    .white__span::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: -90px;
+      top: 30px;
+      background-color: #0000ff;
+    }
+    .white__span-1 {
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: -60px;
+      top: 30px;
+      background-color: #0000ff;
+      z-index: 1;
+    }
+    .white__span-1::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 0px;
+      top: -60px;
+      background-color: #0000ff;
+    }
+    .white__span-1::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 30px;
+      top: -90px;
+      background-color: #0000ff;
+    }
+    .white__span-2 {
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 30px;
+      top: -60px;
+      background-color: #0000ff;
+      z-index: 1;
+    }
+    .white__span-2::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      background-color: #0000ff;
+    }
+    .black {
+      background-color: #745853;
+      width: 30px;
+      height: 30px;
+      position: relative;
+    }
+    .black__span {
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 60px;
+      top: 30px;
+      background-color: #0000ff;
+      z-index: 1;
+    }
+    .black__span::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: -30px;
+      top: 30px;
+      background-color: #0000ff;
+    }
+    .black__span::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: -90px;
+      top: 30px;
+      background-color: #0000ff;
+    }
+    .black__span-1 {
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: -60px;
+      top: 30px;
+      background-color: #0000ff;
+      z-index: 1;
+    }
+    .black__span-1::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 0px;
+      top: -60px;
+      background-color: #0000ff;
+    }
+    .black__span-1::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 30px;
+      top: -90px;
+      background-color: #0000ff;
+    }
+    .black__span-2 {
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 30px;
+      top: -60px;
+      background-color: #0000ff;
+      z-index: 1;
+    }
+    .black__span-2::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      display: block;
+      visibility: hidden;
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      background-color: #0000ff;
+    }
+    .white:active {
+      background-color: #ff0000;
+    }
+    .black:active {
+      background-color: #ff0000;
+    }
+    .white:active .white__span,
+    .white:active .white__span-1,
+    .white:active .white__span-2,
+    .white:active .white__span::before,
+    .white:active .white__span-1::before,
+    .white:active .white__span::after,
+    .white:active .white__span-1::after,
+    .white:active .white__span-2::after {
+      visibility: visible;
+    }
+    .black:active .black__span,
+    .black:active .black__span-1,
+    .black:active .black__span-2,
+    .black:active .black__span::before,
+    .black:active .black__span-1::before,
+    .black:active .black__span::after,
+    .black:active .black__span-1::after,
+    .black:active .black__span-2::after {
+      visibility: visible;
+    }
+  </style>
+  <body>
+    <div class="page">
+      <table class="chess">
+        <tr>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+          <td class="black">
+            <span class="black__span"></span>
+            <span class="black__span-1"></span>
+            <span class="black__span-2"></span>
+          </td>
+          <td class="white">
+            <span class="white__span"></span>
+            <span class="white__span-1"></span>
+            <span class="white__span-2"></span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
